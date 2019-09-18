@@ -1,7 +1,11 @@
 import requests
 import bs4
 import csv
-url="https://www.oyorooms.com/oyo-homes-in-bangalore/"
+file=open("homesaty.csv","a+",newline="",encoding="utf-8")
+writer=csv.writer(file)
+writer.writerow(["Venue_Name","Venue_address","Rating","Amenities","Price"])
+city=input("Enter the City Name:")
+url="https://www.oyorooms.com/oyo-homes-in-"+city+"/"
 for i in range(1,4):
 	new_url=url+"?page="+str(i)
 	data=requests.get(new_url)
@@ -27,3 +31,4 @@ for i in range(1,4):
 		"Price":Price
 		}
 		print(venue)
+		writer.writerow(venue.values())
